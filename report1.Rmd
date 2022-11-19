@@ -1,0 +1,122 @@
+---
+title: "Milestone one"
+author: "ChufanZhou;JiachengYu;XinyuLi;XuZou;YuqianChen."
+date: "2022-11-18"
+output:
+  prettydoc::html_pretty:
+    theme: cyman
+    highlight: github
+  html_document: default
+  rticles::ctex:
+    latex_engine: xelatex
+    keep_tex: true
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+    includes:
+      in_header: setup/ctex_header.tex
+      before_body: setup/ctex_format.tex
+classoption: [a4paper, oneside, zihao=-4, UTF8]
+fontsize: 12pt
+header-includes:
+- \addbibresource{./reference/refs.bib} 
+- \renewcommand*{\bibfont}{\zihao{5}}
+- \usepackage{indentfirst}
+- \setlength{\parindent}{2em}
+
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Report
+
+>- We found a 24GB data set on Kaggle. Here is the URL: *https://www.kaggle.com/datasets/aadimator/nyc-realtime-traffic-speed-data* . 
+This data set contains 'real-time' traffic information from locations where NYCDOT picks up within the five boroughs, mostly on major arterials and highways.
+
+>- According to the topic we want to study initially: 
+**Explore which streets in New York have a higher rate of vehicles over speed.**
+In this way, it is hoped that more speeding interventions can be done on these streets to reduce the incidence of traffic accidents. 
+
+>- In order to control the consistency in the choice of vehicle exceeding speed, we will then control the variable that only select the 'NYC_DOT_LIC' level in the *"owner"* variable, and ignore the remaining 22% 'measurement on bridges or tunnels' level from this variable in the future. 
+
+>- Besides, we divide several small data sets according to different levels of the *"LINK_ID"* variable, which represents different streets in New York.
+We split the data sets through R. In next step, for these 160 small data sets after segmentation, they will be then processed in parallel with the shell command on the CHTC platform to compute the rate of vehicles' exceeding rate in each street.
+
+>- It can be seen from the summary that the filtered data set has a total of 64914523 rows and 13 columns. 
+
+>- We will use the *"id" "speed" "link id" "borough" "link name" *these five variables. 
+*"Speed"* stands for average speed a vehicle traveled between end points on the link in the most recent interval.
+The correspondence between *"id"* and *"link id" *is the basis for us to divide several small data sets. According to the correspondence between the *"link id"* and the *"link name"*, we can know the names of the streets  with high rate of exceeding speed in New York. 
+*"Borough"* represents the name of the New York district where the speed test street is located, including Brooklyn (11123764 data), Bronx (7676967), Manhattan (12547339), Queens (18944931) and Staten Island (14621522). In the future, the regional districts where high-speed streets located can be further explored for certain defenses. 
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
+library(knitr)
+library(gcookbook)
+```
+
+
+```{r uspop,echo=TRUE}
+#Select one of the split csv to display the data set.
+mydata = read.csv("/Users/yujiacheng/Desktop/605\ final/linkid_4329472.csv", header = TRUE)
+mydata_head=mydata[1:5,c(1,2,6,12,13)]
+knitr::kable(head(mydata_head))
+```
+
+
+>- It can be seen that there are 480,944 rows and 13 columns.
+
+
+```{r}
+#Display by Boxplot to check outliers
+ggplot(mydata, aes(y = SPEED)) +
+  geom_boxplot()+
+  ggtitle("Boxplot of Vehicle Speed") +
+  ylab("Count of Vehicles") +
+  xlab("Vehicle Speed")+
+  theme_minimal()+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+
+>- It can be seen from the botplot that there are many outliers, such as vehicles' speed equal to (=) 0 and more than (>) 120. 
+The outliers in all small datasets will be processed in parallel in the future.
+
+
+
+```{r}
+#Delete the outliers and 0 of speed
+mydata_new <- mydata[which(mydata$SPEED !=0),]
+mydata_new <- mydata_new[which(mydata_new$SPEED <120),]
+```
+
+
+>- After removing outliers with the speed equal to 0 and more than 120 in this small dataset, 398,952 rows of data remains.
+
+
+```{r}
+#A histogram display after this small data set was filtered out outliers.
+ggplot(mydata_new,aes(x = SPEED, fill = ..count..)) +
+  geom_histogram(binwidth = 10) +
+  ggtitle("Histogram of Vehicle Speed") +
+  ylab("Count of Vehicles") +
+  xlab("Vehicle Speed") +
+  coord_cartesian(xlim =c(0, 60))+
+  theme_minimal()+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+
+```{r}
+#Compute the rate of exceeding speed in this small dataset after outlier processing.
+sum(mydata_new["SPEED"]>60)/nrow(mydata_new)
+```
+
+
+>- The rate of vehicles'exceeding speed passing on this streets is 0.024%.
