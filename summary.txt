@@ -1,0 +1,187 @@
+
+> summary(mydata)
+       ID            SPEED         TRAVEL_TIME         STATUS         DATA_AS_OF           LINK_ID        LINK_POINTS        ENCODED_POLY_LINE  ENCODED_POLY_LINE_LVLS
+ Min.   :  1.0   Min.   :  0.00   Min.   :   -66   Min.   :-101.00   Length:64914523    Min.   :4329472   Length:64914523    Length:64914523    Length:64914523       
+ 1st Qu.:184.0   1st Qu.: 17.39   1st Qu.:    68   1st Qu.:   0.00   Class :character   1st Qu.:4616192   Class :character   Class :character   Class :character      
+ Median :319.0   Median : 41.01   Median :   132   Median :   0.00   Mode  :character   Median :4616235   Mode  :character   Mode  :character   Mode  :character      
+ Mean   :288.9   Mean   : 34.67   Mean   :   217   Mean   : -16.37                      Mean   :4573641                                                               
+ 3rd Qu.:398.0   3rd Qu.: 50.95   3rd Qu.:   231   3rd Qu.:   0.00                      3rd Qu.:4616329                                                               
+ Max.   :453.0   Max.   :186.41   Max.   :340496   Max.   :   0.00                      Max.   :4763657                                                               
+                                                                                                                                                                      
+    OWNER            TRANSCOM_ID               BOROUGH                                                                      LINK_NAME       
+ Length:64914523    Min.   :4329472   Bronx        :11123764   11th ave n ganservoort - 12th ave @ 40th st                       :  486450  
+ Class :character   1st Qu.:4616192   Brooklyn     : 7676967   CBE E TAYLOR AVENUE - CASTLE HILL AVENUE                          :  486450  
+ Mode  :character   Median :4616235   Manhattan    :12547339   CBE W CASTLE HILL AVENUE - TAYLOR AVENUE                          :  486446  
+                    Mean   :4573641   Queens       :18944931   BE N STRATFORD AVENUE - CASTLE HILL AVE                           :  486435  
+                    3rd Qu.:4616329   Staten island:  406743   CIP S Hempstead Tpk - Laurelton Pkwy @ SSP                        :  486427  
+                    Max.   :4763657   Staten Island:14214779   VWE S MP4.63 (Exit 6 Jamaica Ave) - MP2.66 (Exit 2 Roackaway Blvd):  486419  
+                                                               (Other)                                                           :61995896
+
+
+> table(mydata$BOROUGH)
+
+        Bronx      Brooklyn     Manhattan        Queens Staten island Staten Island 
+     11123764       7676967      12547339      18944931        406743      14214779 
+
+> table(mydata$LINK_NAME)
+
+                                  11th ave n ganservoort - 12th ave @ 40th st                                  11th ave s ganservoort - west st @ spring st 
+                                                                       486450                                                                        486399 
+                                      12th ave @ 45th - 11 ave ganservoort st                                                     12th Ave N 40th - 57th St 
+                                                                       486312                                                                        486384 
+                                                 12th Ave S 57th St - 45th St                                   278 E BRUNSWICK AVENUE - SIE E SOUTH AVENUE 
+                                                                       485398                                                                             2 
+                                  278 E BRUNSWICK AVENUE - WSE S SOUTH AVENUE                                     440 N FRANCIS STREET - WSE N TYRELLAN AVE 
+                                                                            2                                                                        485902 
+                                          BBT E Manhattan Portal - Toll Plaza                             BBT Manhattan Portal inbound - West St N Watts St 
+                                                                       475906                                                                             2 
+                       BBT Manhattan Portal inbound - West St S Battery Place                                           BBT W Toll Plaza - Manhattan Portal 
+                                                                            2                                                                        474649 
+                                       BE N Castle Hill Avenue - Griswold Ave                                       BE N STRATFORD AVENUE - CASTLE HILL AVE 
+                                                                       486088                                                                        486435 
+                                   BE S CASTLE HILL AVENUE - STRATFORD AVENUE                                            BE S Griswold - Castle Hill Avenue 
+                                                                       483436                                                                        485606 
+                                     BE S TBB EXIT RAMP - MANHATTAN LIFT SPAN                                         BE S TBB EXIT RAMP - QUEENS ANCHORAGE 
+                                                                       480927                                                                        479778 
+                                Belt Pkwy E 182nd St - Laurelton Pkwy N @ SSP                                         Belt Pkwy W 182nd St - JFK Expressway 
+                                                                       486312                                                                        485727 
+                               Belt Pkwy W JFK Expressway - VWE N Jamaica Ave                              BKN Bridge Manhattan Side - FDR N Catherine Slip 
+                                                                       485835                                                                        486360 
+                               BQE N Atlantic Ave - BKN Bridge Manhattan Side                                BQE N Atlantic Ave - MAN Bridge Manhattan Side 
+                                                                       486027                                                                        481291 
+                                       BQE N ATLANTIC AVENUE - LEONARD STREET                                            BQE N LEONARD STREET - 46TH STREET 
+                                                                       262574                                                                        486311 
+                                   BQE S - GOW S ALTANTIC AVENUE - 9TH STREET                                            BQE S 46TH STREET - LEONARD STREET 
+                                                                       486034                                                                        486244 
+                                       BQE S LEONARD STREET - ATLANTIC AVENUE                                            BRP N WATSON AVENUE - FORDHAM ROAD 
+                                                                       261686                                                                        486308 
+                                           BRP S FORDHAM ROAD - WATSON AVENUE                                           BWB N Queens Anchorage - Toll Plaza 
+                                                                       483966                                                                        479952 
+                                       BWB N Toll Plaza - HRP N Lafayatte Ave                            BWB S Queens Anchorage - WSE S Exit 14 (Linden Pl) 
+                                                                       484378                                                                        483996 
+                                          BWB S Toll Plaza - Queens Anchorage                                        CBE AMSTERDAM AVE (L/LVL) - MORRIS AVE 
+                                                                       480950                                                                        486091 
+                                      CBE E AMSTERDAM AVE(U/LVL) - MORRIS AVE                                    CBE E CASTLE HILL AVE - BE N WATERBURY AVE 
+                                                                       485607                                                                        486080 
+                                     CBE E TAYLOR AVENUE - CASTLE HILL AVENUE                                      CBE W CASTLE HILL AVENUE - TAYLOR AVENUE 
+                                                                       486450                                                                        486446 
+                                  CBE W L/LE V AMSTERDAM AVE - I 95 S LOC LNS                                CBE W MORRIS AVE - GWB W AMSTERDAM AVE (L/LVL) 
+                                                                       478625                                                                        481856 
+                               CBE W MORRIS AVE - GWB W AMSTERDAM AVE (U/LVL)                                     CBE W U/LEV AMSTERDAM AVE - I95 S EXP LNS 
+                                                                       481835                                                                        480723 
+                                                    CIP N Hempstead Tpk - LIE                                                          CIP N LIE ramp - TNB 
+                                                                       486180                                                                        478286 
+                                     CIP N ramp to TNB - TNB Queens Anchorage                            CIP N TNB - Whitestone Expwy S Exit 14 (Linden Pl) 
+                                                                       480499                                                                        484068 
+                                                             CIP NB GCP - TNB                                    CIP S Hempstead Tpk - Laurelton Pkwy @ SSP 
+                                                                       478486                                                                        486427 
+                                                    CIP S LIE - Hempstead Tpk                                                  CVE NB GCP - WILLETS PT BLVD 
+                                                                       486407                                                                        484346 
+                                                 CVE NB LIE - WILLETS PT BLVD                                  FDR N - TBB E 116TH STREET - MANHATTAN TRUSS 
+                                                                       484589                                                                        480379 
+                                                         FDR N 25th - 63rd St                                                FDR N Catherine Slip - 25th St 
+                                                                       485727                                                                        484561 
+                                               FDR S 25th St - Catherine Slip                                                          FDR S 63rd - 25th St 
+                                                                       485128                                                                        485057 
+                             FDR S Catherine Slip - BKN Bridge Manhattan Side                                           FDR S Catherine Slip - Whitehall St 
+                                                                       485774                                                                             2 
+                           FDR S Whitehall St - BBT Manhattan Portal outbound                                                 GOW N 7TH AVENUE - 9TH STREET 
+                                                                            2                                                                        471646 
+                                               GOW N 92ND STREET - 7TH AVENUE                                            GOW N 9TH STREET - ATLANTIC AVENUE 
+                                                                       486396                                                                        486353 
+                                               GOW S 7TH AVENUE - 92ND STREET                                                 GOW S 9TH STREET - 7TH AVENUE 
+                                                                       483290                                                                        469588 
+                           GOW S VNB W 92ND STREET - BKLYN GANTRY LOWER LEVEL                            GOW S VNB W 92ND STREET - BKLYN GANTRY UPPER LEVEL 
+                                                                       400339                                                                        402420 
+                    GWB E LOWER LEVEL PLAZA - CBE E LOWER LEVEL AMSTERDAM AVE                                     HRP N LAFAYETTE AVENUE - E TREMONT AVENUE 
+                                                                       480461                                                                        485324 
+                                       HRP S Lafayette Ave - BWB S Toll Plaza                                 I-87 NYST S Exit 1 - MDE S Van Cortlandt Park 
+                                                                       480260                                                                        479033 
+                                 Laurelton Pkwy N @ SSP - CIP N Hempstead Tpk                                 Laurelton Pkwy S @ SSP - Belt Pkwy W 182nd St 
+                                                                       486407                                                                        486317 
+                                                     LIE E 84TH ST - 108TH ST                                                LIE E QMT TOLL PLAZA - 84TH ST 
+                                                                       484137                                                                         47068 
+                                                     LIE W 108TH ST - 84TH ST                                                LIE W 84TH ST - QMT TOLL PLAZA 
+                                                                       486398                                                                         47322 
+                                                      LIE WB LITTLE NECK PKWY                                              LIE WB LITTLE NECK PKWY - NB CIP 
+                                                                            1                                                                        484227 
+                                             LIE WB LITTLE NECK PKWY - NB CVE                                          LINCOLN TUNNEL E CENTER TUBE NJ - NY 
+                                                                       484585                                                                        479130 
+                                        LINCOLN TUNNEL E SOUTH TUBE - NJ - NY                                          LINCOLN TUNNEL W CENTER TUBE NY - NJ 
+                                                                       480944                                                                        478108 
+                                          LINCOLN TUNNEL W NORTH TUBE NY - NJ                                                   MDE N RFK Bridge - 142nd St 
+                                                                       480900                                                                        485845 
+                              MDE N VAN CORTLAND PARK - NYST N EXIT 1 (MP.48)                  MDE S HARLEM RIVER PARK - GWB W AMSTERDAM AVENUE LOWER LEVEL 
+                                                                           30                                                                        481820 
+                 MDE S HARLEM RIVER PARK - GWB W AMSTERDAM AVENUE UPPER LEVEL                                        MDE S TBB EXIT RAMP - QUEENS ANCHORAGE 
+                                                                       480572                                                                        479770 
+                                           MLK N WALKER STREET - NJ ROUTE 169                                   MLK S - SIE E WALKER STREET - WOOLEY AVENUE 
+                                                                       475373                                                                        479780 
+                                MLK S - SIE W WALKER STREET - RICHMOND AVENUE                                             QMT E Manhattan Side - Toll Plaza 
+                                                                       484384                                                                        480725 
+                                            QMT W Toll Plaza - Manhattan Side                                               ROUTE 169 S - MLK WALKER STREET 
+                                                                       474977                                                                        483239 
+                                  SIE E-MLK N RICHMOND AVENUE - WALKER STREET                                             SIE E BRADLEY AVENUE - CLOVE ROAD 
+                                                                       479446                                                                        479871 
+                                          SIE E CLOVE ROAD - FINGERBOARD ROAD                                         SIE E RICHMOND AVENUE - WOOLEY AVENUE 
+                                                                       479867                                                                        479908 
+                                         SIE E SOUTH AVENUE - RICHMOND AVENUE                          SIE E VNB E FINGERBOARD ROAD - SI GANTRY LOWER LEVEL 
+                                                                       479905                                                                        401106 
+                         SIE E VNB E FINGERBOARD ROAD - SI GANTRY UPPER LEVEL                                          SIE E WOOLEY AVENUE - BRADLEY AVENUE 
+                                                                       401902                                                                        479873 
+                                  SIE W - MLK N WOOLEY AVENUE - WLAKER STREET                                     SIE W - WSE S SOUTH AVENUE - SOUTH AVENUE 
+                                                                       478890                                                                        479440 
+                                         SIE W BRADLEY AVENUE - WOOLEY AVENUE                                           SIE W FINGERBOARD ROAD - CLOVE ROAD 
+                                                                       485348                                                                        485347 
+                                         SIE W RICHMOND AVENUE - SOUTH AVENUE                                   SIE W SOUTH AVENUE - 278 W BRUNSWICK AVENUE 
+                                                                       484735                                                                             2 
+                                        SIE W WOOLEY AVENUE - RICHMOND AVENUE                                                 TBB N QUEENS ANCHORAGE - BE N 
+                                                                       483042                                                                        482908 
+                                 TBB N QUEENS ANCHORAGE - MANHATTAN LIFT SPAN                                  TBB S MANHATTAN LIFT SPAN - QUEENS ANCHORAGE 
+                                                                       481329                                                                        479590 
+                                TBB W - FDR S MANHATTAN TRUSS - E116TH STREET                                           TNB N Queens Anchorage - Toll Plaza 
+                                                                       480766                                                                        479222 
+                                            TNB S Qns Anchorage - CIP S @ TNB                                           TNB S Toll Plaza - Queens Anchorage 
+                                                                       478785                                                                        479690 
+                    VNB E-GOWANUS N BROOKLYN GANTRY LOWER LEVEL - 92ND STREET                     VNB E-GOWANUS N BROOKLYN GANTRY UPPER LEVEL - 92ND STREET 
+                                                                       406982                                                                        406813 
+                    VNB E SI GANTRY LOWER LEVEL - BROOLKYN GANTRY LOWER LEVEL                     VNB E SI GANTRY UPPER LEVEL - BROOKLYN GANTRY UPPER LEVEL 
+                                                                       402656                                                                        437868 
+                         VNB W-SIE W SI GANTRY LOWER LEVEL - FINGERBOARD ROAD                          VNB W-SIE W SI GANTRY UPPER LEVEL - FINGERBOARD ROAD 
+                                                                       406042                                                                        406743 
+                    VNB W BROOKLYN GANTRY LOWER LEVEL - SI GANTRY LOWER LEVEL                     VNB W BROOKLYN GANTRY UPPER LEVEL - SI GANTRY UPPER LEVEL 
+                                                                       402361                                                                        437406 
+             VWE N MP4.63 (Exit 6 - Jamaica Ave) - MP6.39 (Exit 11 Jewel Ave)             VWE N MP6.39 (Exit 11 Jewel Ave) - MP8.65 (Exit 13 Northern Blvd) 
+                                                                       486383                                                                        485889 
+  VWE N MP8.64 (Exit 13 Northern Blvd) - Whitestone Expwy Exit 14 (Linden Pl)                    VWE S MP2.66 (Exit 2 Rockaway Blvd) - Belt Pkwy E 182nd St 
+                                                                       485890                                                                        486040 
+           VWE S MP4.63 (Exit 6 Jamaica Ave) - MP2.66 (Exit 2 Roackaway Blvd)                VWE S MP6.39 (Exit 11 Jewel Ave) - MP4.63 (Exit 6 Jamaica Ave) 
+                                                                       486419                                                                        486398 
+            VWE S MP8.65 (Exit 13 Northern Blvd) - MP6.39 (Exit 11 Jewel Ave)                                                West St N Whitehall - Watts St 
+                                                                       486081                                                                             2 
+                             West St S Battery Pl - BKN Bridge Manhattan Side                                   West St S Battery Pl - FDR N Catherine Slip 
+                                                                            2                                                                             2 
+                                             West St S Spring St - Battery Pl                           West St S Spring St - BBT Manhattan Portal outbound 
+                                                                            2                                                                        477210 
+                                       West St Watts St - 11th Ave Ganesvoort                                             Westside Hwy \\\\\\\\\\\\\\\\\\\\ 
+                                                                            2                                                                             1 
+                                                 Westside Hwy N 57th St - GWB                                                  Westside Hwy S GWB - 57th St 
+                                                                       481220                                                                        486054 
+                                                         Whit\\\\\\\\\\\\\\\\                                                               Whitestone Expw 
+                                                                            1                                                                             1 
+                                                           Whitestone Expwy N               Whitestone Expwy N Exit 14 (Linden Pl) - BWB N Queens Anchorage 
+                                                                            1                                                                        481239 
+                                          Whitestone Expwy N Exit 14 \\\\\\\\ Whitestone Expwy S Exit 14 (Linden Pl) - VWE S MP8.65 (Exit 13 Northern Blvd) 
+                                                                            1                                                                        486040 
+                                      WSE N-SIE E SOUTH AVENUE - SOUTH AVENUE                                             WSE N ARDEN AVENUE - VICTORY BLVD 
+                                                                       479895                                                                        485816 
+                                      WSE N BLOOMUINGDALE ROAD - ARDEN AVENUE                                   WSE N SOUTH AVENUE - 278 W BRUNSWICK AVENUE 
+                                                                       485813                                                                             2 
+                                    WSE N TYRELLAN AVENUE - BLOOMINGDALE ROAD                                             WSE N VICTORY BLVD - SOUTH AVENUE 
+                                                                       485808                                                                        485811 
+                                       WSE S ARDEN AVENUE - BLOOMINGDALE ROAD                                     WSE S BLLOMINGDALE ROAD - TYRELLAN AVENUE 
+                                                                       479434                                                                        479432 
+                                                         WSE S SOUTH AVENUE -                                        WSE S SOUTH AVENUE - VICTORY BOULEVARD 
+                                                                            1                                                                        479434 
+                                 WSE S TYRELLAN AVENUE - 440 S FRANCIS STREET                                        WSE S VICTORY BOULEVARD - ARDEN AVENUE 
+                                                                       480496                                                                        479431                                     
