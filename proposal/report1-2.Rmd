@@ -1,0 +1,83 @@
+---
+title: "Milestone one"
+author: "ChufanZhou;JiachengYu;XinyuLi;XuZou;YuqianChen."
+date: "2022-11-18"
+output:
+  prettydoc::html_pretty:
+    theme: cyman
+    highlight: github
+  html_document: default
+  rticles::ctex:
+    latex_engine: xelatex
+    keep_tex: true
+    fig_caption: yes
+    number_sections: yes
+    toc: yes
+    includes:
+      in_header: setup/ctex_header.tex
+      before_body: setup/ctex_format.tex
+classoption: [a4paper, oneside, zihao=-4, UTF8]
+fontsize: 12pt
+header-includes:
+- \addbibresource{./reference/refs.bib} 
+- \renewcommand*{\bibfont}{\zihao{5}}
+- \usepackage{indentfirst}
+- \setlength{\parindent}{2em}
+
+---
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Dataset Introduction
+
+>- NYC Real-Time Traffic Speed Data
+>- 24GB dataset on Kaggle https://www.kaggle.com/datasets/aadimator/nyc-realtime-traffic-speed-data
+>- Contains ‘real-time’ traffic information, including average speed, travel time and location of speed detectors
+
+## Question: 
+**Which streets in New York have a higher rate of vehicles over speed**
+
+## Data Description
+
+>- 64 million samples and 13 variables in this dataset 
+>- Care about *“id” “speed” “link_id” “borough” “link_name”* variables
+>- *"borough" *represents the name of the New York district, including Brooklyn, Bronx, Manhattan, Queens and Staten Island
+>- *"link_name"* represents the names of the streets
+
+## Data Split: Divide dataset by “LINK_ID” into 160 small dataset
+*mydata = read.csv("DOT_Traffic_Speeds_NBE.csv", header = TRUE)*<br />
+*linkid = unique(mydata$LINK_ID)* <br />
+*for(i in linkid){* <br />
+  *newdata = mydata[mydata$LINK_ID==i, ]* <br />
+  *write.csv(newdata, paste("linkid_", as.character(i), ".csv", sep=""),* <br /> *row.names=FALSE)* <br />
+*}* <br />
+
+```{r message=FALSE, warning=FALSE, include=FALSE,echo=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
+library(knitr)
+library(gcookbook)
+```
+
+## Read Data
+```{r uspop,echo=TRUE}
+#Select one of the split csv to display the data set.
+mydata = read.csv("/Users/yujiacheng/Desktop/605\ final/linkid_4329472.csv", header = TRUE)
+mydata_head=mydata[1:5,c(1,2,6,12,13)]
+knitr::kable(head(mydata_head))
+```
+## Statistical methods
+
+```{r}
+mydata_new <- mydata[which(mydata$SPEED !=0),]
+mydata_new <- mydata_new[which(mydata_new$SPEED <120),]
+sum(mydata_new["SPEED"]>60)/nrow(mydata_new)
+```
+
+
+>- The rate of vehicles'exceeding speed passing on this streets is 0.024%.
+
+## Github Link: https://github.com/XXinyu-0907/STAT605_final_project_nyc_traffic
