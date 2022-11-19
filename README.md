@@ -1,4 +1,4 @@
-# STAT605_final_project_nyc_traffic 
+# STAT605 Final Project ：Real time traffic data of NYC 
 
 
 ### Group 7:
